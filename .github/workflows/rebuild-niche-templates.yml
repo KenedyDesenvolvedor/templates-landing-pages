@@ -17,11 +17,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Update ZIP with published pages
         run: |
+          rm -rf mais_5_landing_pages
+          unzip -q mais-5-templates-landing-pages.zip
           cp site-pages/mais_5_landing_pages/theme.css mais_5_landing_pages/theme.css
           for folder in 04-imobiliaria 05-clinica-estetica 06-curso-online 07-fotografo 08-saas; do
             cp "site-pages/mais_5_landing_pages/$folder/index.html" "mais_5_landing_pages/$folder/index.html"
           done
-          zip -qr -FS mais-5-templates-landing-pages.zip mais_5_landing_pages
+          rm -f mais-5-templates-landing-pages.zip
+          zip -qr mais-5-templates-landing-pages.zip mais_5_landing_pages
       - name: Commit updated ZIP
         run: |
           git config user.name "github-actions[bot]"
