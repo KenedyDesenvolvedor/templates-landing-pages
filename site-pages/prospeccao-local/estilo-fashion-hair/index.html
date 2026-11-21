@@ -16,6 +16,82 @@
 @media(max-width:800px){.stepGrid{grid-template-columns:1fr}.stepCard{min-height:0}.stepCard h3{margin:16px 0 8px}.faqCta{align-items:flex-start;flex-direction:column}.faqCta .button{width:100%}}
 @media(max-width:540px){body{padding-bottom:72px}.mobileContact{position:fixed;z-index:30;bottom:12px;left:12px;right:12px;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--accent);color:var(--bg);font-size:12px;font-weight:900;letter-spacing:1px;border-radius:var(--radius);box-shadow:0 10px 35px #0008}.mobileContact span{font-size:18px}.faqItem{padding:0 8px}.faqItem summary{font-size:14px}.infoPanel{padding:22px}.detail{padding:18px}.footer{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* KenyDev Design Refresh — identidade premium, leitura confortável e responsividade */
+:root{--bg:#f4f6f8;--panel:#ffffff;--accent:#b87991;--text:#18212b;--muted:#657180;--line:#e4e9ef;--font:'DM Sans',sans-serif;--radius:20px}
+html{scroll-padding-top:90px}
+body{background:linear-gradient(180deg,#fbf4f7 0,#f7f8fa 34%,#f4f6f8 100%);color:var(--text);font-family:'DM Sans',Inter,Arial,sans-serif;line-height:1.65}
+a{transition:color .2s ease,background .2s ease,transform .2s ease,box-shadow .2s ease}
+.wrap{width:min(1180px,calc(100% - 52px))}
+.demo{background:#422b38;color:#fff;padding:10px 16px;font-size:9px;letter-spacing:1.8px}
+.header{height:88px;border:0;border-bottom:1px solid #18212b12;background:#ffffffc9;backdrop-filter:blur(18px)}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:800;letter-spacing:-.7px;color:#422b38;font-size:21px}
+.logo img{border-radius:14px;box-shadow:0 8px 24px #18212b18}
+.logo span{color:#b87991}
+nav{gap:30px;color:#596574;font-weight:600;font-size:12px}
+nav a:hover{color:#b87991}
+.navcta{border:1px solid #b87991;border-radius:999px;color:#422b38;padding:12px 19px;background:#fff}
+.hero{padding:clamp(64px,8vw,112px) 0 clamp(66px,8vw,104px);gap:clamp(36px,6vw,76px)}
+.eyebrow{color:#b87991;font-size:10px;letter-spacing:2px;font-weight:900}
+.hero h1{font-family:'DM Sans',sans-serif;font-size:clamp(44px,6.2vw,76px);line-height:1.02;letter-spacing:-1.8px;color:#422b38;margin:18px 0 22px;text-wrap:balance}
+.hero p{font-size:15px;line-height:1.9;color:#5d6875;max-width:520px}
+.button{background:#b87991;color:#fff;border-radius:999px;padding:15px 23px;box-shadow:0 10px 24px #b8799130;font-size:10px;letter-spacing:1px;min-height:50px}
+.button:hover{background:#422b38;color:#fff;transform:translateY(-2px);box-shadow:0 14px 28px #18212b20}
+.button.secondary{background:#fff;color:#422b38;border:1px solid #dce3e9;box-shadow:none}
+.button.secondary:hover{border-color:#b87991;color:#b87991;background:#fff}
+.heroMedia{min-height:clamp(350px,43vw,540px);border-radius:28px;background:#f7edf1;box-shadow:0 28px 75px #24344820;border:8px solid #ffffffb8}
+.heroMedia img{border-radius:20px}
+.heroMedia:after{background:linear-gradient(transparent,#101820a8)}
+.floating{background:#fff;color:#422b38;border-radius:999px;padding:12px 18px;box-shadow:0 8px 24px #0002}
+.photoCaption{font-size:10px;letter-spacing:1.6px}
+.strip{border:1px solid #e3e8ed;border-radius:16px;background:#ffffffc9;padding:19px 24px;color:#697583;font-size:9px;letter-spacing:1.3px}
+.section{padding:clamp(68px,8vw,104px) 0}
+.sectionHead{gap:40px;margin-bottom:32px}
+.section h2,.callout h2{font-family:'DM Sans',sans-serif;color:#422b38;font-size:clamp(34px,4.5vw,54px);line-height:1.08;letter-spacing:-.8px;text-wrap:balance}
+.sectionHead p{color:#66717f;font-size:13px;line-height:1.9}
+.featureGrid{gap:18px}
+.feature{background:#fff;border:1px solid #e7ebef;border-radius:20px;padding:30px;min-height:220px;box-shadow:0 12px 35px #24344808;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.feature:hover,.infoCard:hover,.stepCard:hover{transform:translateY(-5px);border-color:#b8799170;box-shadow:0 20px 42px #24344812}
+.feature small,.infoCard small{color:#b87991;letter-spacing:1.5px}
+.feature h3{font-family:'DM Sans',sans-serif;font-size:25px;color:#422b38;margin:35px 0 10px}
+.feature p,.infoCard p,.detail p,.stepCard p{color:#687482;font-size:13px;line-height:1.85}
+.infoPanel{background:#fff;border:1px solid #e5eaf0;border-radius:26px;padding:clamp(26px,5vw,54px);box-shadow:0 24px 65px #2434480b}
+.infoPanel h2{font-family:'DM Sans',sans-serif;font-size:clamp(34px,4.5vw,52px);line-height:1.08;color:#422b38;margin:12px 0}
+.infoIntro{color:#687482;line-height:1.9}
+.infoGrid{gap:14px}
+.infoCard{background:#f7edf1;border:1px solid #b8799118;border-radius:16px;padding:22px;min-height:150px;transition:all .22s ease}
+.infoCard h3{color:#422b38;font-family:'DM Sans',sans-serif;font-size:21px}
+.detailsGrid{gap:16px}
+.detail{background:#f8fafb;border:1px solid #e7ebef;border-radius:16px;padding:24px}
+.detail h3{font-family:'DM Sans',sans-serif;font-size:20px;color:#422b38}
+.gallery{gap:14px;grid-template-rows:250px 250px}
+.gallery figure{border-radius:18px;box-shadow:0 12px 30px #24344812}
+.gallery img{filter:saturate(.92);transition:transform .7s,filter .7s}
+.gallery figure:hover img{transform:scale(1.05);filter:saturate(1.08)}
+.gallery figcaption{font-size:9px;letter-spacing:1.5px}
+.stepGrid{gap:16px}
+.stepCard{background:#fff;border:1px solid #e5eaf0;border-radius:18px;padding:28px;box-shadow:0 10px 30px #24344808;transition:all .22s ease}
+.stepCard>span{background:#f7edf1;color:#422b38;border:1px solid #b8799150}
+.stepCard h3{font-family:'DM Sans',sans-serif;font-size:22px;color:#422b38}
+.faqList{border-color:#e3e8ed}
+.faqItem{border-color:#e3e8ed;padding:0 20px}
+.faqItem summary{color:#422b38;font-size:14px}
+.faqItem summary b{color:#b87991}
+.faqItem p{color:#687482}
+.faqCta{background:#f7edf1;border:1px solid #b8799130;border-radius:18px;padding:24px}
+.faqCta p{color:#53606e}
+.callout{background:#422b38;border:0;border-radius:24px;padding:clamp(30px,5vw,52px);box-shadow:0 24px 60px #18212b20}
+.callout h2{color:#fff}
+.callout p{color:#e3e9ed}
+.callout .button{background:#fff;color:#422b38;box-shadow:none}
+.footer{border-color:#e1e6eb;color:#687482;padding:32px 0}
+.footer b{color:#422b38}
+.mobileContact{background:#b87991;color:#fff;border-radius:999px;box-shadow:0 12px 30px #b8799155}
+:focus-visible{outline:3px solid #b87991;outline-offset:4px}
+@media(max-width:800px){.wrap{width:calc(100% - 36px)}.hero{padding-top:54px}.heroMedia{min-height:360px;border-width:5px}.sectionHead{gap:12px}.gallery{grid-template-rows:220px 170px}.callout{border-radius:20px}}
+@media(max-width:540px){.wrap{width:calc(100% - 28px)}.demo{font-size:8px;letter-spacing:1px}.header{height:74px}.hero{padding:48px 0 56px}.hero h1{font-size:clamp(42px,12vw,60px);letter-spacing:-1.2px}.hero p{font-size:14px}.heroMedia{min-height:300px;border-radius:20px}.heroMedia img{border-radius:14px}.strip{border-radius:14px;padding:16px 18px}.section{padding:66px 0}.feature{padding:24px;min-height:0}.feature h3{margin:22px 0 8px}.infoPanel{border-radius:20px;padding:22px}.infoCard{min-height:0}.detail{padding:20px}.gallery{gap:9px;grid-template-rows:190px 135px}.faqItem{padding:0 8px}.faqCta{padding:20px}.footer{gap:8px}.mobileContact{left:12px;right:12px;bottom:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
 </style></head><body>
 <div class="demo">CONCEITO VISUAL KENYDEV · NÃO É UM SITE OFICIAL · IMAGENS ILUSTRATIVAS</div>
 <header class="wrap header"><a class="logo" href="#">ESTILO <span>FASHION</span></a><nav aria-label="Navegação principal"><a href="#informacoes">Experiência</a><a href="#galeria">Galeria</a><a href="#duvidas">Dúvidas</a><a class="navcta" href="#contato">Entre em contato ↗</a></nav></header>
