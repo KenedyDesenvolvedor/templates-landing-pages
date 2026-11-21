@@ -10,6 +10,7 @@ cp "$ROOT/index.html" "$OUTPUT/index.html"
 # Publica os oito sites como páginas navegáveis por URL.
 cp -R "$ROOT/site-pages/landing_pages_vendaveis" "$OUTPUT/landing_pages_vendaveis"
 cp -R "$ROOT/site-pages/mais_5_landing_pages" "$OUTPUT/mais_5_landing_pages"
+cp -R "$ROOT/site-pages/prospeccao-local" "$OUTPUT/prospeccao-local"
 
 # Os ZIPs são gerados pelo workflow do GitHub. Se já existirem, também ficam disponíveis.
 for archive in 3-templates-landing-pages-vendaveis.zip mais-5-templates-landing-pages.zip; do
