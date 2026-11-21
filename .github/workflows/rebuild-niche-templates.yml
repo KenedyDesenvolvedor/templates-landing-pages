@@ -15,20 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update ZIP with published pages
+      - name: Generate ZIP packages from published source
         run: |
-          rm -rf mais_5_landing_pages
-          unzip -q mais-5-templates-landing-pages.zip
-          cp site-pages/mais_5_landing_pages/theme.css mais_5_landing_pages/theme.css
-          for folder in 04-imobiliaria 05-clinica-estetica 06-curso-online 07-fotografo 08-saas; do
-            cp "site-pages/mais_5_landing_pages/$folder/index.html" "mais_5_landing_pages/$folder/index.html"
-          done
-          rm -f mais-5-templates-landing-pages.zip
+          rm -rf landing_pages_vendaveis mais_5_landing_pages
+          cp -R site-pages/landing_pages_vendaveis ./landing_pages_vendaveis
+          cp -R site-pages/mais_5_landing_pages ./mais_5_landing_pages
+          zip -qr 3-templates-landing-pages-vendaveis.zip landing_pages_vendaveis
           zip -qr mais-5-templates-landing-pages.zip mais_5_landing_pages
-      - name: Commit updated ZIP
+          rm -rf landing_pages_vendaveis mais_5_landing_pages
+      - name: Commit updated ZIP packages
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add mais-5-templates-landing-pages.zip
-          git commit -m "Atualiza pacote ZIP com landing pages especializadas" || exit 0
+          git add 3-templates-landing-pages-vendaveis.zip mais-5-templates-landing-pages.zip
+          git commit -m "Atualiza pacotes ZIP com os oito nichos" || exit 0
           git push
