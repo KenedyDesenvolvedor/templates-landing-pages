@@ -1,24 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 OUTPUT="$ROOT/public"
 
 rm -rf "$OUTPUT"
 mkdir -p "$OUTPUT/downloads"
-
 cp "$ROOT/index.html" "$OUTPUT/index.html"
-cp "$ROOT/3-templates-landing-pages-vendaveis.zip" "$OUTPUT/downloads/"
-cp "$ROOT/mais-5-templates-landing-pages.zip" "$OUTPUT/downloads/"
 
-# Extrai os três primeiros modelos e mantém a estrutura de pastas.
-unzip -oq "$ROOT/3-templates-landing-pages-vendaveis.zip" -d "$OUTPUT"
-unzip -oq "$ROOT/mais-5-templates-landing-pages.zip" -d "$OUTPUT"
+# Publica os oito sites como páginas navegáveis por URL.
+cp -R "$ROOT/site-pages/landing_pages_vendaveis" "$OUTPUT/landing_pages_vendaveis"
+cp -R "$ROOT/site-pages/mais_5_landing_pages" "$OUTPUT/mais_5_landing_pages"
 
-# As páginas revisadas são a fonte publicada para os cinco nichos.
-cp "$ROOT/site-pages/mais_5_landing_pages/theme.css" "$OUTPUT/mais_5_landing_pages/theme.css"
-for folder in 04-imobiliaria 05-clinica-estetica 06-curso-online 07-fotografo 08-saas; do
-  cp "$ROOT/site-pages/mais_5_landing_pages/$folder/index.html" "$OUTPUT/mais_5_landing_pages/$folder/index.html"
+# Os ZIPs são gerados pelo workflow do GitHub. Se já existirem, também ficam disponíveis.
+for archive in 3-templates-landing-pages-vendaveis.zip mais-5-templates-landing-pages.zip; do
+  if [ -f "$ROOT/$archive" ]; then cp "$ROOT/$archive" "$OUTPUT/downloads/"; fi
 done
 
-echo "Build estático concluído em: $OUTPUT"
+echo "Build estático concluído: oito páginas publicáveis em $OUTPUT"
