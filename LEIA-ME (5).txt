@@ -1,0 +1,8 @@
+IMPULSO — Template de landing page
+
+1. Abra index.html no navegador.
+2. Personalize nome, textos, cores, contatos e redes sociais.
+3. Substitua o WhatsApp de demonstração (5500000000000) pelo número real.
+4. Revise as informações e publique index.html, style.css e script.js.
+
+Layout responsivo. HTML, CSS e JavaScript puros. Fontes externas via Google Fonts.
