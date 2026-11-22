@@ -2,6 +2,14 @@
   "name": "templates-landing-pages",
   "main": "./worker.js",
   "compatibility_date": "2026-11-22",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "brasa-royale-orders",
+      "database_id": "aaa03816-fbe1-4e3e-b204-5cec61662da4",
+      "migrations_dir": "./migrations"
+    }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
