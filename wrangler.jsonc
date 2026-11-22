@@ -1,0 +1,11 @@
+{
+  "$schema": "https://schema.latest.json",
+  "name": "templates-landing-pages",
+  "main": "./worker.js",
+  "compatibility_date": "2026-11-22",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  }
+}
