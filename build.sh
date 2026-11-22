@@ -11,7 +11,8 @@ cp "$ROOT/index.html" "$OUTPUT/index.html"
 cp -R "$ROOT/site-pages/landing_pages_vendaveis" "$OUTPUT/landing_pages_vendaveis"
 cp -R "$ROOT/site-pages/mais_5_landing_pages" "$OUTPUT/mais_5_landing_pages"
 cp -R "$ROOT/site-pages/prospeccao-local" "$OUTPUT/prospeccao-local"
-cp -R "$ROOT/site-pages/briefing-cliente" "$OUTPUT/site-pages/briefing-cliente"\ncp -R "$ROOT/site-pages/barbearia-estilo-precisao" "$OUTPUT/site-pages/barbearia-estilo-precisao"
+cp -R "$ROOT/site-pages/briefing-cliente" "$OUTPUT/site-pages/briefing-cliente"
+cp -R "$ROOT/site-pages/barbearia-estilo-precisao" "$OUTPUT/site-pages/barbearia-estilo-precisao"
 cp -R "$ROOT/site-pages/prospeccao-12" "$OUTPUT/site-pages/prospeccao-12"
 
 # Os ZIPs são gerados pelo workflow do GitHub. Se já existirem, também ficam disponíveis.
