@@ -10,7 +10,7 @@
       "migrations_dir": "./migrations"
     }
   ],
-  "assets": {
+  "r2_buckets": [\n    { "binding": "GALLERY_BUCKET", "bucket_name": "kenydev-barbearia-galeria" }\n  ],\n  "assets": {
     "directory": "./public",
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"]
