@@ -4,7 +4,7 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 OUTPUT="$ROOT/public"
 
 rm -rf "$OUTPUT"
-mkdir -p "$OUTPUT/downloads"
+mkdir -p "$OUTPUT/downloads" "$OUTPUT/site-pages"
 cp "$ROOT/index.html" "$OUTPUT/index.html"
 
 # Publica os oito sites como páginas navegáveis por URL.
