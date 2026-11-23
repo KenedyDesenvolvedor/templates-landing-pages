@@ -10,9 +10,6 @@
       "migrations_dir": "./migrations"
     }
   ],
-  "r2_buckets": [
-    { "binding": "GALLERY_BUCKET", "bucket_name": "kenydev-barbearia-galeria" }
-  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
