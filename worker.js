@@ -193,80 +193,9 @@ async function handleBrasa(request, env, url) {
 }
 
 
-function decodeBase64Url(value) {
-  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
-  const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
-  const binary = atob(padded);
-  return Uint8Array.from(binary, ch => ch.charCodeAt(0));
-}
-async function createGalleryToken(secret) {
-  const expires = Date.now() + 8 * 60 * 60 * 1000;
-  const payload = toBase64Url(new TextEncoder().encode(String(expires) + ":" + toBase64Url(crypto.getRandomValues(new Uint8Array(24)))));
-  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
-  const signature = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(payload)));
-  return payload + "." + toBase64Url(signature);
-}
-async function validGallerySession(request, secret) {
-  const parts = bearer(request).split(".");
-  if (parts.length !== 2) return false;
-  try {
-    const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["verify"]);
-    const valid = await crypto.subtle.verify("HMAC", key, decodeBase64Url(parts[1]), new TextEncoder().encode(parts[0]));
-    const payload = new TextDecoder().decode(decodeBase64Url(parts[0]));
-    const expires = Number(payload.split(":")[0]);
-    return valid && Number.isFinite(expires) && expires > Date.now();
-  } catch { return false; }
-}
-async function handleGallery(request, env, url) {
-  if (!env.GALLERY_BUCKET) return json({ error: "Armazenamento R2 não configurado." }, 503);
-  if (url.pathname === "/api/gallery/login" && request.method === "POST") {
-    if (!env.GALLERY_ADMIN_PASSWORD || !env.GALLERY_SESSION_SECRET) return json({ error: "Credenciais administrativas não configuradas." }, 503);
-    const body = await readJson(request, 2000);
-    if (body.error) return json(body, 400);
-    if (!constantTimeEqual(String(body.password || ""), env.GALLERY_ADMIN_PASSWORD)) return json({ error: "Senha incorreta." }, 401);
-    return json({ token: await createGalleryToken(env.GALLERY_SESSION_SECRET) });
-  }
-  if (url.pathname === "/api/gallery/images" && request.method === "GET") {
-    const listed = await env.GALLERY_BUCKET.list({ prefix: "barbearia/", limit: 100 });
-    return json({ images: (listed.objects || []).map(o => ({ key: o.key, size: o.size })) });
-  }
-  const imageMatch = url.pathname.match(/^\/api\/gallery\/image\/(barbearia\/[a-zA-Z0-9._-]+)$/);
-  if (imageMatch && request.method === "GET") {
-    const object = await env.GALLERY_BUCKET.get(imageMatch[1]);
-    if (!object) return json({ error: "Imagem não encontrada." }, 404);
-    const headers = new Headers();
-    object.writeHttpMetadata(headers);
-    headers.set("Cache-Control", "public, max-age=3600");
-    headers.set("X-Content-Type-Options", "nosniff");
-    return new Response(object.body, { headers });
-  }
-  if (url.pathname === "/api/gallery/upload" && request.method === "POST") {
-    if (!env.GALLERY_SESSION_SECRET || !await validGallerySession(request, env.GALLERY_SESSION_SECRET)) return json({ error: "Acesso administrativo necessário." }, 401);
-    if (Number(request.headers.get("content-length") || 0) > 6 * 1024 * 1024 + 65536) return json({ error: "Cada imagem deve ter no máximo 6 MB." }, 413);
-    let form;
-    try { form = await request.formData(); } catch { return json({ error: "Envio inválido." }, 400); }
-    const file = form.get("image");
-    if (!file || typeof file.arrayBuffer !== "function" || file.size < 1 || file.size > 6 * 1024 * 1024) return json({ error: "Selecione uma imagem de até 6 MB." }, 400);
-    const types = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/avif": "avif" };
-    const ext = types[file.type];
-    if (!ext) return json({ error: "Formato não permitido. Use JPG, PNG, WEBP ou AVIF." }, 415);
-    const key = "barbearia/" + crypto.randomUUID() + "." + ext;
-    await env.GALLERY_BUCKET.put(key, await file.arrayBuffer(), { httpMetadata: { contentType: file.type, cacheControl: "public, max-age=3600" } });
-    return json({ ok: true, key }, 201);
-  }
-  const deleteMatch = url.pathname.match(/^\/api\/gallery\/images\/(barbearia\/[a-zA-Z0-9._-]+)$/);
-  if (deleteMatch && request.method === "DELETE") {
-    if (!env.GALLERY_SESSION_SECRET || !await validGallerySession(request, env.GALLERY_SESSION_SECRET)) return json({ error: "Acesso administrativo necessário." }, 401);
-    await env.GALLERY_BUCKET.delete(deleteMatch[1]);
-    return json({ ok: true });
-  }
-  return json({ error: "Rota da galeria não encontrada." }, 404);
-}
-
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname.startsWith("/api/gallery/")) return handleGallery(request, env, url);
     if (url.pathname.startsWith("/api/brasa/")) return handleBrasa(request, env, url);
     if (url.pathname !== "/api/briefing") {
       if (url.pathname.startsWith("/api/")) return json({ error: "Rota não encontrada." }, 404);
