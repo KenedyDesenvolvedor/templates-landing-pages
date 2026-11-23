@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import multer from "multer";
 import path from "node:path";
@@ -23,6 +24,7 @@ if (ADMIN_PASSWORD.length < 12 || SESSION_SECRET.length < 32) {
 }
 
 app.disable("x-powered-by");
+app.set("trust proxy", "loopback");
 app.use((req, res, next) => {
   res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
