@@ -10,7 +10,7 @@
 ### Preparar na VPS
 
 1. Instale Node.js LTS e Nginx.
-2. Envie/clonе este repositório para a VPS.
+2. Envie/clone este repositório para a VPS.
 3. Na raiz do projeto, execute `bash ./build.sh`.
 4. Entre em `vps-gallery/` e execute `npm install`.
 5. Copie `.env.example` para `.env` e configure a senha e o segredo.
