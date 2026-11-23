@@ -1,24 +1,29 @@
-# Mais 5 Landing Pages
-
-04 — Imobiliária Vértice  
-05 — Clínica de estética Lumi  
-06 — Cursos online Impulso  
-07 — Fotografia Luz & Foco  
-08 — SaaS Nexflow  
-
-Cada pasta contém HTML, CSS, JavaScript e instruções. Personalize informações demonstrativas e o número do WhatsApp antes de publicar ou entregar ao cliente.
+# KenyDev — Templates de Landing Pages
 
 ## Template: Barbearia Estilo & Precisão
 
 - Página: `/site-pages/barbearia-estilo-precisao/`
-- A galeria usa Cloudflare R2; as imagens enviadas ficam disponíveis para todos os visitantes.
-- O envio e a remoção de imagens exigem senha administrativa. A senha nunca fica no HTML.
+- A galeria está preparada para armazenar imagens no disco da VPS, sem Cloudflare R2.
+- A listagem de fotos é pública; login, upload e remoção exigem senha administrativa.
+- Formatos aceitos: JPG, PNG, WEBP e AVIF; até 6 MB por imagem.
 
-### Configuração obrigatória no Cloudflare
+### Preparar na VPS
 
-1. Crie um bucket R2 chamado `kenydev-barbearia-galeria`.
-2. Confirme o binding R2 `GALLERY_BUCKET` no Worker `templates-landing-pages`.
-3. Cadastre os secrets `GALLERY_ADMIN_PASSWORD` (senha forte da equipe) e `GALLERY_SESSION_SECRET` (segredo aleatório longo, mínimo 32 caracteres).
-4. Faça o deploy do Worker. Sem o bucket e os dois secrets, a galeria não aceitará uploads.
+1. Instale Node.js LTS e Nginx.
+2. Envie/clonе este repositório para a VPS.
+3. Na raiz do projeto, execute `bash ./build.sh`.
+4. Entre em `vps-gallery/` e execute `npm install`.
+5. Copie `.env.example` para `.env` e configure a senha e o segredo.
+6. Inicie com `npm start`; em produção, mantenha o processo ativo com systemd ou PM2.
+7. Configure o Nginx com o exemplo `nginx-site.example` e habilite HTTPS.
 
-Cada imagem aceita JPG, PNG, WEBP ou AVIF, até 6 MB. A listagem pública é somente leitura; upload e exclusão exigem sessão administrativa.
+O backend Node serve os arquivos estáticos da pasta `public` e a API `/api/gallery`. As imagens são gravadas em `storage/gallery/barbearia/` (ou no caminho definido por `GALLERY_STORAGE_DIR`).
+
+### Variáveis de ambiente
+
+- `PORT`: porta HTTP local (padrão 3000).
+- `GALLERY_ADMIN_PASSWORD`: senha forte com pelo menos 12 caracteres.
+- `GALLERY_SESSION_SECRET`: segredo aleatório com pelo menos 32 caracteres.
+- `GALLERY_STORAGE_DIR`: diretório opcional e persistente para as imagens.
+
+**Estado atual:** arquivos preparados no GitHub, mas ainda não publicados nem testados em uma VPS. O site que continua no Cloudflare não terá a galeria ativa até a migração do site e da API para a VPS, com domínio e proxy configurados. Faça backup periódico do diretório de imagens.
